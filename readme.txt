@@ -11,7 +11,7 @@ To run the system you have to:
 	and grant the user permission to the database
 2.4 Create tables in the database by using file create_table.sql
 2.5 Fill in table specialities.
-3 Work with the system ‘nagruzka’
+3 Work with the system â€˜nagruzkaâ€™
 3.1 Set up the environment in .env file in the main directory of project using
 database setup information, default server localhost, default port 5432 
 3.2 From the main directory of project in terminal run command
@@ -22,6 +22,6 @@ npm start
 3.5 To stop working with the system to close browser and stop the system app by pressing in terminal Ctrl+C
 
 
-git remote add origin https://github.com/nhordon/nagruzka.git
+
 
 
