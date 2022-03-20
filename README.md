@@ -1,5 +1,5 @@
 # Nagruzka
-### The system was made for education department of collage to distribute groups, classes, teaching hours according to departments, semesters, studying years, subjects and types of teaching (lecture, practice, lab, project, diploma, etc) to teachers. The project allows generate different kind of orders and teacher cards with hours of teaching subjects, types of teaching and group names for a year.
+### The system was made for education department of college to distribute groups, classes, teaching hours according to departments, semesters, studying years, subjects and types of teaching (lecture, practice, lab, project, diploma, etc) to teachers. The project allows generate different kind of orders and teacher cards with hours of teaching subjects, types of teaching and group names for a year.
 It uses Excel and Word templates for the generation. 
 Technologies are Node.js, Express.js, EJS, Postgresql.
 
