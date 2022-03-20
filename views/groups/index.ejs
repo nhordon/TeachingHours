@@ -1,0 +1,44 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Groups</h1>
+    <a href="/groups/add" class="btn btn-primary mb-2 btn-sm">Додати</a>
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th width="90px">Дії</th>
+               
+                <th>name</th>
+                <th>course</th>
+                <th>specid</th>
+                <th>dogovor</th>
+                <th>studentsdogovor</th>
+                <th>studentsbudget</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% groups.forEach(groups => { %>
+            <tr>
+                <td>
+                    <a href="/groups/edit/<%= groups._id %>" class="btn btn-warning btn-sm" title="Редагувати">
+                        <img src="images/edit-24px.svg" width="16px" height="16px" />                   
+                    </a>             
+                   
+                    <a href="/groups/delete/<%= groups._id %>" class="btn btn-danger btn-sm" title="Видалити">
+                        <img src="images/delete_outline-24px.svg" width="16px" height="16px" />
+                    </a>
+                </td>
+                <td><%= groups.name %></td>
+                <td><%= groups.course %></td>
+                <td><%= groups.abr %></td>
+                <% let financial='';
+                 if(groups.dogovor==true) { financial = 'контракт';}
+                else  {financial ='бюджет'; }%>
+                <td><%= financial %></td>
+                <td><%= groups.studentsdogovor %></td>
+                <td><%= groups.studentsbudget %></td>
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+</div>
+<%- include("../partials/footer"); %>

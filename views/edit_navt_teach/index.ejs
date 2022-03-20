@@ -1,0 +1,102 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Teachload Навантаження викладачів</h1>
+    <%#teachload._id as _id, teachload.eduloadid as eduloadid, eduload.groupid, groups.name as groupname,
+eduload.subjectid,subjects.name as sub,teachload.teacherid, teachers.name as teachname, eduload.semestr, 
+teachload.lectures, teachload.practices, teachload.labs, teachload.classwork, teachload.consultations, teachload.exams, 
+teachload.credits, teachload.courseworks, teachload.edupractice, teachload.diplompractice, teachload.statexam, teachload.total,
+teachload.loaddate, assigned %>
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="/edit_navt_teach/add" class="btn btn-primary mb-2 btn-sm">Додати</a>
+           </div>
+           
+  
+   </div>
+
+ 
+
+    <table class="table table-bordered table-striped table-sm" width="120%"  >
+        <thead>
+            <tr>
+                <th width="100px">Дії</th>
+               
+                <th>groupname</th>
+                <th>subject</th>
+                <th>teachername</th>
+                <th>semestr</th>
+                <th>lectures</th>
+                <th>practices</th>
+
+                <th>labs</th>
+                <th>classwork</th>
+                <th>consultations</th>
+                <th>exams</th>
+                <th>credits</th>
+                <th>courseworks</th>
+              
+                <th>edupractice</th>
+                <th>diplompractice</th>
+                <th>statexam</th>
+                <th>exams</th>
+                <th>total</th>
+                <th>loaddate</th>
+                <th>assigned</th>
+                
+
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% eduload.forEach(eduload => { %>
+                        
+              
+            <tr>
+                <% if(eduload.teachname ==null) {%>
+                    <td></td>
+               <% } else {%>
+                <td>
+                    <a href="/edit_navt_teach/edit/<%= eduload._id %>" class="btn btn-warning btn-sm" title="Редагувати">
+                        <img src="images/edit-24px.svg" width="12px" height="12px" />                   
+                    </a>             
+                   
+                    <a href="/edit_navt_teach/delete/<%= eduload._id %>" class="btn btn-danger btn-sm" title="Видалити">
+                        <img src="images/delete_outline-24px.svg" width="12px" height="12px" />
+                    </a>
+                </td> <%}%>
+                <td><%= eduload.groupname %></td>
+                <td><%= eduload.sub %></td>
+                <td><%= eduload.teachname %></td>
+                <td><%= eduload.semestr %></td>
+                <td><%= eduload.lectures %></td>
+                <td><%= eduload.practices %></td>
+                <td><%= eduload.labs %></td>
+                <td><%= eduload.classwork %></td>
+                <td><%= eduload.consultations %></td>
+                <td><%= eduload.exams %></td>
+                <td><%= eduload.credits %></td>
+                <td><%= eduload.courseworks %></td>
+                <td><%= eduload.edupractice %></td>
+                <td><%= eduload.diplompractice %></td>
+                <td><%= eduload.statexam %></td>
+                <td><%= eduload.exams %></td>
+                <td><%= eduload.total %></td>
+             
+                <td><%= 
+               `${eduload.loaddate.getDate()} / ${eduload.loaddate.getMonth()}
+                / ${eduload.loaddate.getFullYear()}`
+              // eduload.loaddate.toString.split(' ').slice(1,4).join(' ')
+                 %></td>
+
+<% if(eduload.teachname !=null) {%>
+    <td></td>
+<% } else {%>
+                 <td><%= eduload.assigned %></td>
+<%}%>
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+</div>
+<script src="/javascripts/myutils.js" type="text/javascript"></script>
+<%- include("../partials/footer"); %>

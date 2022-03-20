@@ -1,0 +1,57 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Редагувати subjects</h1>
+    <form method="post" action="/subjects/update">
+
+        <input value="<%= subjects._id %>" name="_id" id="_id" type="hidden">
+        <div class="form-group">
+
+       
+            <label for="name">name</label>
+             <input value="<%= subjects.name %>" required id="name" placeholder="Скорочено предмет"
+            class="form-control" type="text" name="name">
+        </div>
+         <div class="form-group">
+                <label for="fullname">fullname</label>
+                <input value="<%= subjects.fullname %>" required id="fullname" placeholder="Повністю предмет"
+                    class="form-control" type="text"   name="fullname">
+        </div> 
+      
+        <div class="form-group">
+            <label for="pckid">pckid</label>
+            
+                <select name="pckid" id="pckid" required class="form-control">
+                   
+                   <%  
+                        for(let i=0; i<pckAbr.length;i++){
+                 %>
+                    <option value="<%= pckAbr[i]._id %>" <% if(subjects.pckid ==pckAbr[i]._id ){ %> selected <% } %> >
+                        <%= pckAbr[i].abr %></option>
+                    <%
+                   }
+                   %>
+                  
+                </select>
+
+        </div>
+        <div class="form-group">
+            <label for="programs">programs</label>
+           
+            <select name="programs" id="programs" required class="form-control">
+                <option value="ОПП" <% if( subjects.programs=='ОПП'){%> selected   <% }  %> >ОПП</option>
+              
+                <option value="ЗОП"  <% if( subjects.programs=='ЗОП'){%> selected   <% }  %> >ЗОП</option>
+             
+              
+            </select>
+
+
+        </div>
+       
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/subjects" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

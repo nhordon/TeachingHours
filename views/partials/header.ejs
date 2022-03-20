@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="uk">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
+   
+    
+  <link href="/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="/stylesheets/style.css" rel="stylesheet">
+
+
+    <title><%= title %></title>
+</head>
+
+<% 
+const nagruzkaMenu = {
+    bd:['Робота з базою',
+                { save_bd:'Зберегти базу',
+                specialities:'Перевірити спеціальності',
+                groups:'Перевірити групи',
+               
+                pck:'Перевірити ПЦК',
+                categories:'Перевірити категорії викладачів',
+                teachers:'Перевірити викладачів',
+                subjects:'Перевірити предмети'
+                
+                 }],
+    editd:['Редагування даних',
+                {
+                    upload_plan:'Завантажити учбовий план',
+                    edit_navt:'Редагування навантаження загальна таблиця' ,
+                    edit_navt_teach:'Редагування навантаження викладачів',
+                assign_subteacher:'Розподіл предметів за викладачем та групою' 
+              
+                        }],
+    report:['Генерація звітів',
+            {   leaderpck_navt:'Розрахунок годин педнавантаження для голів ПЦК', //бюджет, контракт
+                
+            report_navt: 'Накази про навантаження', 
+            teachers_navt:'Навантаження викладачів',     
+           teachers_card:'Картки викладачів',
+           
+        }],            
+          
+};
+ 
+ %>
+<body>
+    <!-- menu -->
+    
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" target="_blank" href="#">Node with PGSQL </a>
+        <button aria-label="Показати або приховати меню" class="navbar-toggler" id="botonMenu" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+       <div class="collapse navbar-collapse" id="menu">
+       
+            <ul class="navbar-nav mr-auto">
+
+
+
+ <!-- Dropdown -->
+ 
+                <% Object.entries(nagruzkaMenu).forEach(([key, arrval]) => { %>
+                    
+                <li class="nav-item dropdown" >
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <%= arrval[0] %>
+                    </a>
+                    <div class="dropdown-menu" id="subbotonMenu">
+                     
+                      <%  Object.entries(arrval[1]).forEach(([key1, val1]) =>  { 
+                        
+                      
+                        if(Array.isArray(val1)){ 
+                            var cat_path=''; 
+                            let i=0;
+                              for(; i<val1.length; i++){
+                           
+                               // if(i!=0)
+                                    cat_path='/'+key1+'/'+(i+1);
+                                //else cat_path='/'+key1; 
+                        %>
+                        <a class="dropdown-item" href="<%= cat_path %>"><%= val1[i] %></a>
+                                             
+                        <% }  
+                    }//isArray
+                        else{
+                         %> <a class="dropdown-item" href="/<%= key1 %>"><%= val1 %></a>
+                    
+                           
+                <% } 
+              })%>
+
+                    </div>
+                  </li>
+                  <% })%>
+                <li class="nav-item">
+                    <a class="nav-link" href="/help">Допомога</a>
+                </li>
+              
+            </ul>
+        </div>
+    </nav>
+    <script type="text/javascript">
+        
+       document.addEventListener("DOMContentLoaded", () => {
+            const menu = document.querySelector("#menu"),
+                botonMenu = document.querySelector("#botonMenu");
+            if (menu) {
+                botonMenu.addEventListener("click", () => menu.classList.toggle("show"));
+            }
+        }); 
+       
+        
+    </script>
+    <!-- end menu -->
+    <main role="main" class="container">
+        <div class="row">

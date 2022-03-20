@@ -1,0 +1,28 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Редагувати specialities</h1>
+    <form method="post" action="/specialities/update">
+
+        <input value="<%= specialities._id %>" name="_id" id="_id" type="hidden">
+        <div class="form-group">
+            <label for="number">number</label>
+            <input value="<%= specialities.number %>" required id="number" placeholder="number specialities"
+                class="form-control" type="text" name="number">
+        </div>
+        <div class="form-group">
+            <label for="abr">abr</label>
+            <input value="<%= specialities.abr %>" required id="abr" placeholder="abr specialities"
+                class="form-control" type="text" name="abr">
+        </div>
+        <div class="form-group">
+            <label for="name">name</label>
+            <input value="<%= specialities.name %>" required id="name" placeholder="name specialities"
+                class="form-control" type="text" name="name">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/specialities" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

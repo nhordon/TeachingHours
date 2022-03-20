@@ -1,0 +1,24 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Редагувати categories</h1>
+    <form method="post" action="/categories/update">
+
+        <input value="<%= categories._id %>" name="_id" id="_id" type="hidden">
+        <div class="form-group">
+            <label for="name">name Категорія викладача</label>
+            <input value="<%= categories.name %>" required id="name" placeholder="Назва категорії викладача"
+                class="form-control" type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label for="payment">payment Погодинна оплата</label>
+            <input value="<%= categories.payment %>" required id="payment" placeholder="0.00"
+                class="form-control" type="text" name="payment">
+        </div>
+       
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/categories" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

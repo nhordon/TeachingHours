@@ -1,0 +1,72 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Редагувати groups</h1>
+    <form method="post" action="/groups/update">
+
+        <input value="<%= groups._id %>" name="_id" id="_id" type="hidden">
+        <div class="form-group">
+            <label for="name">name</label>
+            <input value="<%= groups.name %>" required id="name" placeholder="name groups"
+                class="form-control" type="text" name="name">
+        </div>
+        <div class="form-group">
+            <label for="course">course</label>
+            <input value="<%= groups.course %>" required id="course" placeholder="course groups"
+                class="form-control" type="number" min="1" max="4" name="course">
+        </div>
+        <div class="form-group">
+            <label for="specid">specid</label>
+            
+                <select name="specid" id="specid" required class="form-control">
+                   
+                   <%  
+                        for(let i=0; i<specAbr.length;i++){
+                 %>
+                    <option value="<%= specAbr[i]._id %>" <% if(groups.specid ==specAbr[i]._id ){ %> selected <% } %> ><%= specAbr[i].abr %></option>
+                    <%
+                   }
+                   %>
+                  
+                </select>
+
+        </div>
+        <fieldset>
+            <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline ">
+             
+                <input   id="dogovor_bg"   class="custom-control-input" type="radio" 
+                name="dogovor" value="false" 
+                <% if(!groups.dogovor){ %>
+                checked   <% }%>  >
+               
+                <label class="custom-control-label radio-inline" for="dogovor_bg" >  Бюджет   </label>
+            </div>
+    
+            <div class="custom-control custom-radio custom-control-inline">
+                
+                <input   id="dogovor_ct"   class="custom-control-input" type="radio" 
+                name="dogovor" value="true"   <% if(groups.dogovor){ %>
+                    checked   <% }%> >
+                <label class="custom-control-label radio-inline" for="dogovor_ct" >
+                  Контракт</label>
+            </div>
+
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <label for="studentsdogovor">studentsdogovor Кількість студентів контракт</label>
+        <input   id="studentsdogovor" value="<%= groups.studentsdogovor %>" class="form-control" type="text" 
+        name="studentsdogovor" >
+    </div>
+    <div class="form-group">
+        <label for="studentsbudget">studentsbudget  Кількість студентів бюджет</label>
+        <input   id="studentsbudget" value="<%= groups.studentsbudget %>" class="form-control" type="text" 
+        name="studentsbudget" >
+    </div>
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/groups" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

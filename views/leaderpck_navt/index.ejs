@@ -1,0 +1,108 @@
+<%- include("../partials/header"); %>
+<div class="col-sm-12">
+    <h3 class="h3-align">Розрахунок годин педнавантаження для голів ПЦК </h3>
+	<h6 class="h6-align">Перевірте актуальність даних у таблиці навантаження <a  href="/edit_navt">(Перейти на навантаження)</a> </h6>
+	
+
+	<div class="container">
+		<form id="uploadSingleFileForm" method="POST" action="/leaderpck_navt/upload" enctype ="multipart/form-data" cache=
+				'false' >
+		
+
+		<div class="row">
+			<div class="col-sm-8">
+				<fieldset class="fieldset-border">
+					 
+					<legend class="legend-size">Робота з годинами педнавантаження для голів ПЦК </legend>
+					<div class="form-group form-inline">
+						<div class="col-sm-6" >
+						<label for="lasteduyear" >Вибрати останній рік навчання</label>
+					</div>	
+					<div class="col-sm-2">
+						<input class="form-control" type="number" name="lasteduyear" id="lasteduyear" required
+                value="2020"   min="2020" max="2040"  size="4" maxlength="4">
+               
+						
+							</div>
+					</div>
+				
+					<div class="form-group form-inline" >
+						<div class="col-sm-6" style="text-align:left">
+						<label >Вибрати форму навчання</label>
+						</div>
+						<div class="col-sm-2">
+							<fieldset>
+								<div class="form-group form-inline">
+								<div class="custom-control custom-radio custom-control-inline ">
+									<input   id="dogovor_bg"   class="custom-control-input" type="radio" 
+									name="dogovor" value="false" checked>
+								   
+									<label class="custom-control-label radio-inline" for="dogovor_bg" >  Бюджет   </label>
+								</div>
+						
+								<div class="custom-control custom-radio custom-control-inline">
+									
+									<input   id="dogovor_ct"   class="custom-control-input" type="radio" 
+									name="dogovor" value="true">
+									<label class="custom-control-label radio-inline" for="dogovor_ct" >
+									  Контракт</label>
+								</div>
+						
+							</div>
+						</fieldset>
+						</div>
+					</div>
+
+
+					
+
+
+
+					
+				</fieldset>	
+			</div>
+			
+		</div>
+		<div class="row file-color "  >
+			
+			<fieldset class="fieldset-border" >
+				<legend class="legend-size" > Сформувати Розрахунок пед навантаження для голів ПЦК </legend>
+			<div class="col-sm-4">
+				
+					
+					<div class=" form-group form-inline">
+					<input type="checkbox"	name="change" value="false" id="change" class="custom-control custom-checkbox custom-control-inline">
+					<label for="change">Замінити старий шаблон</label>
+			   
+					</div>
+
+			</div>
+
+			<div class="col-sm-12" >
+				
+				
+						<div class="form-group form-inline">
+							<label class="control-label" for="uploadfile">Виберіть файл  Excel з новим шаблоном  у форматі *.xlsx</label>
+							<input type="file" class="form-control"  name="file"  
+							accept=".xlsx" />
+						</div>
+						
+					
+					
+			</div>
+					<button type="submit" class="btn btn-danger" id="btnUploadSingleFileSubmit"> 
+						Завантажити Розрахунок 
+					</button>
+				
+				</fieldset>	
+			</div>
+		
+		
+		
+
+
+		</form>		
+	</div>
+</div>
+
+	<%- include("../partials/footer"); %>

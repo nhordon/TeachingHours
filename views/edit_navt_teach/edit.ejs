@@ -1,0 +1,124 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Редагувати eduload</h1>
+    <form method="post" action="/edit_navt/update">
+
+        <input value="<%= eduload._id %>" name="_id" id="_id" type="hidden">
+
+        <div class="form-group">
+            <label for="groupid">groupid</label>
+            
+                <select name="groupid" id="groupid" required class="form-control">
+                   
+                   <%  
+                        for(let i=0; i<groupName.length;i++){
+                 %>
+                    <option value="<%= groupName[i]._id %>" 
+                        <% if(eduload.groupid ==groupName[i]._id ){ %> selected <% } %> >
+                        <%= groupName[i].name %></option>
+                    <%
+                   }
+                   %>
+                   </select>
+         </div>
+        <div class="form-group">
+            <label for="subjectid">subjectid</label>
+            
+                <select name="subjectid" id="subjectid" required class="form-control">
+                   
+                   <%  
+                        for(let i=0; i<subjectName.length;i++){
+                 %>
+                    <option value="<%= subjectName[i]._id %>" 
+                        <% if(eduload.subjectid ==subjectName[i]._id ){ %> selected <% } %> >
+                        <%= subjectName[i].name %></option>
+                    <%
+                   }
+                   %>
+                   </select>
+         </div>
+
+         <div class="form-group">
+            <label for="teacherid">teacherid</label>
+            
+                <select name="teacherid" id="teacherid" class="form-control">
+                    <% if(eduload.teacherid ==null|| eduload.teacherid ==0){ %>
+                        <option value="0" selected >Викладача не вибрано</option>
+                        <% } else{ %>
+                            <option value="0"  >Викладача не вибрано</option>
+                       <% } %>
+
+                   <%  
+                        for(let i=0; i<teacherName.length;i++){
+                 %>
+                    <option value="<%= teacherName[i]._id %>" 
+                        <% if(eduload.teacherid ==teacherName[i]._id ){ %> selected <% } %> >
+                        <%= teacherName[i].name %></option>
+                    <%
+                   }
+                   %>
+                  
+                   </select>
+         </div>
+         <div class="form-group">
+            <label for="semestr">semestr</label>
+            
+                <select name="semestr" id="semestr" class="form-control">
+                   
+                  
+                    <option value="1" 
+                        <%  let str = 'selected'; 
+                        if(eduload.semestr ==1 ){ %> <%= str%> <%
+                   }
+                   %>  >
+                        1</option>
+                    
+                   <option value="2" 
+                        <% if(eduload.semestr ==2 ){ %> <%= str%> <%
+                   }
+                   %>  >
+                        2</option>
+                   
+                   </select>
+         </div>
+
+         <% let fields=['lectures лекцій', 'practices практичних', 'labs лабораторних', 
+                'consultations консультацій', 'exams екзаменів', 'credits заліків', 
+                'courseworks курсових_робіт', 'edupractice навчальних_практик', 
+                'diplompractice переддипломної_практики', 'statexam державний_іспит'];
+                for(let field of fields){
+                    let param1=field.split(' ');//;.slice(0,1);
+                    //let param2=field.split(' ');//.slice(1,2);
+                %>
+
+        <div class="form-group">
+            <label for="<%=param1[0]%>"><%=param1[0]%> Кількість <%=param1[1]%></label>
+            <input   id="<%=param1[0]%>" 
+            value="<%= eduload[param1[0]] %>" class="form-control" type="text" 
+            name="<%=param1[0]%>" >
+        </div>
+<% } %>
+        
+<div class="form-group">
+            <label for="assigned">assigned</label>
+           <% 
+           let array=['нерозп','основн','додат'];
+           %>
+            <select name="assigned" id="assigned"  class="form-control">
+            <% for(let i=0; i<array.length;i++){ 
+                let ass='';
+                if(eduload.assigned==array[i])
+                ass='selected';
+                 %>  
+                <option value="<%=array[i] %>" <%= ass%>><%=array[i] %></option>              
+                        
+                <%} %>
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/edit_navt" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

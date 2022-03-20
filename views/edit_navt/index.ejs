@@ -1,0 +1,121 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Eduload Навантаження</h1>
+    <div class="row">
+        <div class="col-sm-2">
+            <a href="/edit_navt/add" class="btn btn-primary mb-2 btn-sm">Додати</a>
+           </div>
+           <div class="col-sm-4">
+           
+       </div>
+   <div class="col-sm-2">
+    
+      
+        
+            <select name="groupid" id="groupid" required 
+            class="form-control" onchange="selectGroup()"  >
+                <option value="<%= groupNameHours[0]._id %>" 
+                 selected  >
+                    <%= groupNameHours[0].name %></option>
+
+               <%  
+                    for(let i=1; i<groupNameHours.length;i++){
+             %>
+                <option value="<%= groupNameHours[i]._id %>" >
+                   
+                    <%= groupNameHours[i].name %></option>
+                <%
+               }
+               %>
+               </select>
+     
+   </div>
+   <div class="col-sm-2">
+     <a href="/edit_navt/insertfromhoursgroup/<%=groupNameHours[0]._id%>" 
+        class="btn btn-warning mb-2 btn-sm" id="upgroup">Оновити групу з учбового плану</a>
+</div>
+<div class="col-sm-2">
+    <a href="/edit_navt/insertfromhours" class="btn btn-warning mb-2 btn-sm">Оновити все з учбового плану</a>
+   </div>
+   </div>
+
+ 
+
+    <table class="table table-bordered table-striped table-sm" width="100%"  >
+        <thead>
+            <tr>
+                <th width="100px">Дії</th>
+               
+                <th>groupname</th>
+                <th>subject</th>
+                <th>teachername</th>
+                <th>semestr</th>
+                <th>lectures</th>
+                <th>practices</th>
+
+                <th>labs</th>
+                <th>classwork</th>
+                <th>consultations</th>
+                <th>exams</th>
+                <th>credits</th>
+                <th>courseworks</th>
+              
+                <th>edupractice</th>
+                <th>diplompractice</th>
+                <th>statexam</th>
+                <th>exams</th>
+                <th>total</th>
+                <th>loaddate</th>
+                <th>assigned</th>
+                
+
+            </tr>
+        </thead>
+        <tbody>
+            
+            <% eduload.forEach(eduload => { %>
+                
+                
+              
+            <tr>
+                <td>
+                    <a href="/edit_navt/edit/<%= eduload._id %>" class="btn btn-warning btn-sm" title="Редагувати">
+                        <img src="images/edit-24px.svg" width="16px" height="16px" />                   
+                    </a>             
+                   
+                    <a href="/edit_navt/delete/<%= eduload._id %>" class="btn btn-danger btn-sm" title="Видалити">
+                        <img src="images/delete_outline-24px.svg" width="16px" height="16px" />
+                    </a>
+                </td>
+                <td><%= eduload.groupname %></td>
+                <td><%= eduload.sub %></td>
+                <td><%= eduload.teachname %></td>
+                <td><%= eduload.semestr %></td>
+                <td><%= eduload.lectures %></td>
+                <td><%= eduload.practices %></td>
+                <td><%= eduload.labs %></td>
+                <td><%= eduload.classwork %></td>
+                <td><%= eduload.consultations %></td>
+                <td><%= eduload.exams %></td>
+                <td><%= eduload.credits %></td>
+                <td><%= eduload.courseworks %></td>
+                <td><%= eduload.edupractice %></td>
+                <td><%= eduload.diplompractice %></td>
+                <td><%= eduload.statexam %></td>
+                <td><%= eduload.exams %></td>
+                <td><%= eduload.total %></td>
+             
+                <td><%= 
+               `${eduload.loaddate.getDate()} / ${eduload.loaddate.getMonth()}
+                / ${eduload.loaddate.getFullYear()}`
+              
+                 %></td>
+                 <td><%= eduload.assigned %></td>
+
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+</div>
+<script src="/javascripts/myutils.js" type="text/javascript"></script>
+<%- include("../partials/footer"); %>
