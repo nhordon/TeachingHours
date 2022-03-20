@@ -1,0 +1,42 @@
+<%- include("../partials/header"); %>
+<div class="col-sm-12">
+    <h3 class="h3-align">Педнавантаження викладачів </h3>
+	
+	
+
+	<div class="container">
+		<form id="uploadSingleFileForm" method="POST" action="/teachers_navt/upload"  cache=
+				'false' >
+		
+
+	
+				<div class="row col-sm-12"  >
+			<fieldset class="fieldset-border" >
+				<legend class="legend-size" > Сформувати  навантаження викдадачів </legend>
+			
+		<div class="row "  >
+				<div class="col-sm-5">
+		
+					<button type="submit" class="btn btn-danger" id="btnEduloadSubmit1" name="btnEduloadSubmit" value="1" > 
+						Завантажити попереднє навантаження 
+					</button>
+				</div>
+				<div class="col-sm-1"> </div>
+				<div  class="col-sm-5">
+					<button type="submit" class="btn btn-danger" id="btnEduloadSubmit2" name="btnEduloadSubmit" value="2" > 
+						Завантажити остаточне навантаження 
+					</button>
+				</div>
+			</div>
+				</fieldset>	
+				</div>
+		
+		
+		
+
+
+		</form>		
+	</div>
+</div>
+
+	<%- include("../partials/footer"); %>

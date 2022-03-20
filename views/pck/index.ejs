@@ -1,0 +1,37 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Pck</h1>
+    <a href="/pck/add" class="btn btn-primary mb-2 btn-sm">Додати</a>
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th width="90px">Дії</th>
+               
+                <th>abr</th>
+                <th>name</th>
+                <th>leaderid</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <% pck.forEach(pck => { %>
+            <tr>
+                <td>
+                    <a href="/pck/edit/<%= pck._id %>" class="btn btn-warning btn-sm" title="Редагувати">
+                        <img src="images/edit-24px.svg" width="16px" height="16px" />                   
+                    </a>             
+                   
+                    <a href="/pck/delete/<%= pck._id %>" class="btn btn-danger btn-sm" title="Видалити">
+                        <img src="images/delete_outline-24px.svg" width="16px" height="16px" />
+                    </a>
+                </td>
+                <td><%= pck.abr %></td>
+                <td><%= pck.name %></td>
+                <td><%= pck.teachname %></td>
+               
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+</div>
+<%- include("../partials/footer"); %>

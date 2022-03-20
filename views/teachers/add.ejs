@@ -1,0 +1,86 @@
+<%- include("../partials/header"); %>
+<!--//name, sovmest, norma, sverh, fact-->
+<div class="col-12">
+    <h1>Додати  teachers</h1>
+    <form method="post" action="/teachers/insert">
+        <div class="form-group">
+            <label for="name">name</label>
+            <input required id="name" placeholder="name teachers" class="form-control" type="text"
+                name="name">
+        </div>
+
+        <fieldset>
+            <div class="form-group">
+            
+    
+            <div class="custom-control custom-radio custom-control-inline">
+                
+                <input   id="sovmest_ct"   class="custom-control-input" type="radio" 
+                name="sovmest" value="false" checked>
+                <label class="custom-control-label radio-inline" for="sovmest_ct" >
+                  Основний</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline ">
+                <input   id="sovmest_bg"   class="custom-control-input" type="radio" 
+                name="sovmest" value="true" >
+               
+                <label class="custom-control-label radio-inline" for="sovmest_bg" >  Сумісник   </label>
+            </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <label for="norma">norma Нормові години</label>
+            <input required id="norma"  class="form-control" type="text"
+                name="norma" value="720">
+        </div>
+        <div class="form-group">
+            <label for="sverh">sverh Понаднормові години</label>
+            <input  required id="sverh" value="0"  class="form-control" type="text" 
+            name="sverh">
+        </div>
+        <div class="form-group">
+            <label for="fact">fact Фактичні години</label>
+            <input  required id="sverh" value="0"  class="form-control" type="text" 
+            name="fact">
+        </div>
+        <div class="form-group">
+            <label for="position">position Посада</label>
+            <input   id="position" placeholder="посада" class="form-control" type="text"
+                name="position">
+        </div>
+
+        <div class="form-group">
+            <label for="categoryid">categoryid Категорія</label>
+          
+            <select name="categoryid" id="categoryid"   class="form-control">
+                <option value="<%= categoryName[0]._id %>" selected><%= categoryName[0].name %></option>
+               <% 
+               for(let i=1; i<categoryName.length;i++){
+                %>
+                <option value="<%= categoryName[i]._id %>"><%= categoryName[i].name %></option>
+                <%
+               }
+               %>              
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="pckid">pckid ПЦК</label>
+           
+            <select name="pckid" id="pckid"   class="form-control">
+                <option value="<%= pckAbr[0]._id %>" selected><%= pckAbr[0].abr %></option>
+               <% 
+               for(let i=1; i<pckAbr.length;i++){
+                %>
+                <option value="<%= pckAbr[i]._id %>"><%= pckAbr[i].abr %></option>
+                <%
+               }
+               %>              
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/teachers" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

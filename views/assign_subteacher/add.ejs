@@ -1,0 +1,420 @@
+
+				<%- include("../partials/header"); %>
+				<div class="col-sm-12">
+					<h3 class="h3-align">Розподіл предметів за викладачем та групою </h3>
+					<h6 class="h6-align">Вибір викладача </h6>
+				
+							<%
+							
+							let namearray=[];
+							
+							eduloadTeacher.forEach(teach=>{ if(teach.teacherid){
+							
+							  namearray.push(teacherName.find(teachname=>{if(teachname._id==teach.teacherid){return teachname};
+							
+							  }));
+							 
+							}}) 
+							//console.log(namearray);
+							%>		
+					<div class="container">
+						<!--FORM with Teachers to DELETE from teacherload-->
+						<div class="row "> 
+							<% let str="";  if(eduloadTeacher.length!=0){ 
+
+							str=`<form id="assign_subteacherForm_del" method="POST" action="/assign_subteacher/delete" >
+							<input type="hidden" name="pckabr" value="${pckabr}">
+							<input type="hidden" name="subjectname" value="${eduloadTeacher[0].subjectname}">
+							<input type="hidden" name="groupname" value="${eduloadTeacher[0].groupname}">
+							<input type="hidden" name="semestr" value="${eduloadTeacher[0].semestr}">
+							<input type="hidden" name="eduloadid" value="${eduloadTeacher[0]._id}">
+							<p>Працюємо з ПЦК: ${pckabr} | Предмет: ${eduloadTeacher[0].subjectname} 
+			
+			| Група: ${eduloadTeacher[0].groupname} | Семестр: ${eduloadTeacher[0].semestr} | </p><p> 
+				&nbsp;Розподілені викладачі ${eduloadTeacher.length-1} осіб:  `;
+			 for(let prop of namearray ){
+				 // href=/assign_subteacher/delete/teacherid/ nagruzka number eduloadTeacher[0]._id/eduloadTeacher[0].subjectid/eduloadTeacher[0].groupid/eduloadTeacher[0].semestr
+				// str+=`${prop.name} <a href="/assign_subteacher/delete/${prop._id}/${eduloadTeacher[0]._id}/${eduloadTeacher[0].subjectid}/${eduloadTeacher[0].groupid}/${eduloadTeacher[0].semestr}"
+				//  class="del" id="btnDelete">Видалити з навантаження</a>  | `;
+				  str+=`${prop.name}<button type="submit" class="btn btn-danger" id="btnassign_subteacherDelete" name="teacherid" value="${prop._id}" > Видалити</button>
+				  | `; 
+			 }  
+			 str+=`</form>`;
+
+				
+				}else{
+					str='<p class="p-error">Невірно вибрано семестр  <a href="/assign_subteacher" >НАЗАД</a></p>  ';
+				}%>	
+				<%-str%>	
+						</div>
+<!--FORM with big TABLE-->
+						<div class="row "> 
+							
+		<form id="assign_subteacherForm" method="POST" action="/assign_subteacher/insert"  >
+						
+			<input value="<%=eduloadTeacher[0]._id%>" name="eduloadid" id="eduloadid" type="hidden">
+		<div class="row "  >
+			<div class="col-sm-3" >	
+				Години для
+			</div>
+			<div class="col-sm-3" >	
+				Викладач
+			</div>
+			<div class="col-sm-6" >	
+				<div class="form-group ">
+					<% 
+					const abrcounts = teacherName.reduce((acc, value) => ({    ...acc,
+						  [value.abr]: (acc[value.abr] || 0) + 1
+						  }), {});
+
+						 // console.log("teacherName",teacherName);
+						  //console.log(abrcounts);
+					%>
+					<select class="form-control" name="teacherid" id="teacherid"   required >
+						<option value="-1"   >Виберіть викладача</option>
+					<% let selectedid=0;
+						if(eduloadTeacher.length>1){
+								selectedid=eduloadTeacher[0].teacherid;
+						}
+						
+						let start=0; 
+						
+						for(let pck in abrcounts){%>
+						<optgroup label="<%=pck%>">
+							<% let sel=``;
+							for(let i=start;i<abrcounts[pck]+start; i++){ 
+								if(selectedid==teacherName[i]._id){sel="selected"}
+								else{sel=""}
+								%>
+								<option value="<%=teacherName[i]._id%>"  <%=sel%> ><%=teacherName[i].name%></option>
+
+							<% 
+						
+						}start+=abrcounts[pck];
+						 %>
+
+						</optgroup>
+					<%	
+					}		
+					%>		
+						
+					</select>	
+					
+						
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="row "  >
+			<div class="col-sm-3" >	
+				
+			</div>
+			<div class="col-sm-3" >	
+				Всі 
+				
+			</div>
+			<div class="col-sm-3" >	
+				Нерозподілені
+				
+			</div>
+			<div class="col-sm-3" >	
+				Розподілені
+			</div>
+		</div>
+		<% let load=eduloadTeacher.length-1;
+		
+		let fields=['lectures лекцій', 'practices практичних', 'labs лабораторних', 
+                'consultations консультацій', 'exams екзаменів', 'credits заліків', 
+                'courseworks курсових_робіт', 'edupractice навчальних_практик', 
+                'diplompractice переддипломної_практики', 'statexam державний_іспит'];
+				let valuetotal_teach=0;
+				let valuetotal_balance=0;
+                for(let field of fields){
+                    let param1=field.split(' ');//;.slice(0,1);
+                    
+					let values_load= eduloadTeacher[load][param1[0]];
+					let values_teach=0;
+					let values_balance=values_load;
+					if(eduloadTeacher.length>1){
+						values_teach= eduloadTeacher[0][param1[0]];
+
+
+						values_balance-=eduloadTeacher[0][param1[0]];
+					for(let i=1;i<eduloadTeacher.length-1;i++)
+					values_balance-=eduloadTeacher[i][param1[0]];
+					}
+					valuetotal_teach=Number(valuetotal_teach)+Number(values_teach);
+					valuetotal_balance=Number(valuetotal_balance)+Number(values_balance);
+                %>
+		<div class="row "  >
+			<div class="col-sm-3" >	
+				<%=param1[1]%>
+			</div>
+			<div class="col-sm-3" >	
+				<div class="form-group">
+			
+				<input   id="<%=param1[0]+ '_load'%>" 
+				value="<%=values_load%>" class="form-control load" type="text" 
+				name="<%=param1[0]+ '_load'%>" readonly>
+				</div>
+				
+			</div>
+			<div class="col-sm-3" >	
+				<div class="form-group">
+			
+				<input   id="<%=param1[0]+ '_balance'%>" 
+				value="<%=values_balance%>" class="form-control balance" type="number" 
+				name="<%=param1[0]+ '_balance'%>" min="0.0" step="0.1" readonly>
+				</div>
+				
+			</div>
+			<div class="col-sm-3" >	
+				<div class="form-group">
+			<% let valuemax=Number(values_teach)+Number(values_balance); %>
+				<input   id="<%=param1[0]+ '_teach'%>" 
+				value="<%=values_teach%>" class="form-control teach" type="number" 
+				name="<%=param1[0]+ '_teach'%>" max="<%=valuemax%>" min="0.0" step="0.1">
+				</div>
+			</div>
+		</div>
+		<% } %>
+		<div class="row "  >
+			<div class="col-sm-3 " >	
+				<!--<a  class="btn btn-info" id="btTotal"> Всього </a>-->
+						
+					Всього 
+			</div>
+			<div class="col-sm-3 " >	
+				<div class="form-group  " >
+					<%
+					let valuetotal_load=eduloadTeacher[eduloadTeacher.length-1].total;
+					%>
+			
+				<input   id="total_load" value="<%=valuetotal_load%>" class="form-control total" type="text"  name="total_load" readonly >
+			</div>
+			</div>
+			<div class="col-sm-3 " >	
+				<input   id="total_balance" value="<%=valuetotal_balance%>" class="form-control total" type="text"  name="total_balance" readonly >
+			</div>
+			<div class="col-sm-3 " >	
+				<input   id="total_teach" value="<%=valuetotal_teach%>" class="form-control total" type="text"  name="total_teach" readonly >
+			</div>
+		</div>
+			<div class="row "  >
+				<div class="col-sm-3" >
+					<% let bstr=``; if(valuetotal_teach==0){bstr=`disabled`; } else bstr=``;  %>
+					<button type="submit" class="btn btn-danger" id="btnassign_subteacherSubmit" <%=bstr%> > 
+						Зберегти 
+					</button>
+				</div>
+				<div class="col-sm-6" >
+					<div class="form-group form-inline">
+					<input type="checkbox" name="distribute" id="distribute" value="true" disabled>
+					<label for="distribute">Внести у базу для  навантаження позначку "Розподілено"</label>
+				
+					
+					
+					</div>
+			
+					
+				</div>
+				<div class="col-sm-3" >
+					<a  class="btn btn-info" id="btTakeAll" > 
+						Віддати все 
+					</a>
+				</div>
+			
+			</div>
+		
+			
+
+
+		</form>		
+	
+	</div>
+	
+		</div>
+</div>
+
+<script>
+	let mList = <%- JSON.stringify(eduloadTeacher) %>;
+	let fields= <%- JSON.stringify(fields) %>;
+
+
+	let   arr_teach = document.querySelectorAll('input.teach');
+let   arr_load = document.querySelectorAll('input.load');
+let   arr_balance = document.querySelectorAll('input.balance');
+function findTotal(){
+   
+   let tot=0;
+    for(let i=0;i<arr_teach.length;i++){
+       
+        if(parseFloat(arr_teach[i].value))
+            tot += parseFloat(arr_teach[i].value);
+    }
+    document.getElementById('total_teach').value = tot;
+}
+function findBalance(){
+   
+   let tot=0;
+    for(let i=0;i<arr_teach.length;i++){
+       
+        if(parseFloat(arr_teach[i].value)){
+			arr_balance[i].value = parseFloat(arr_load[i].value) - arr_balance_base[i]- parseFloat((arr_teach[i].value));
+			tot += parseFloat(arr_balance[i].value);
+		}
+	}
+	document.getElementById('total_balance').value = tot;
+}
+function findInvalid(){
+	let arr_invalid=document.querySelectorAll(':invalid');
+	const button = document.getElementById('btnassign_subteacherSubmit');
+	if(arr_invalid.length>0){
+		button.disabled = true;
+	}
+	else button.disabled = false;
+}
+
+
+	function selectTeacher() {
+		let currentteach=  document.getElementById("teacherid").value;
+		  
+		const index = mList.findIndex(teach => teach.teacherid == currentteach);
+
+		let valuetotal_teach=0;
+			for(let field of fields){
+							let param1=field.split(' ');
+							let values_load= mList[mList.length-1][param1[0]];
+							let values_teach=0;
+							let values_balance=values_load;
+							if(index!=-1){
+							values_teach= mList[index][param1[0]];
+							
+							
+							values_balance=values_load-values_teach;
+							if(mList.length>2){
+														
+							for(let i=0;i<mList.length-1;i++){
+							if(index!=i) 
+								values_balance-=mList[i][param1[0]];
+							}
+							
+							}
+						
+						}
+
+						document.getElementById(param1[0]+ '_teach').value = values_teach;
+						valuetotal_teach=Number(valuetotal_teach)+ Number(values_teach);
+						 
+			} 
+			document.getElementById('total_teach').value = valuetotal_teach;
+	}
+	const changeteacherid=document.getElementById('teacherid');
+	changeteacherid.addEventListener('change',selectTeacher,false);
+ 
+ function noTeacher(){
+	const nullteacher=document.getElementById('teacherid');
+	
+	const button = document.getElementById('btnassign_subteacherSubmit');
+	const check=document.getElementById('distribute');
+	if(nullteacher.value==-1){
+		button.disabled = true;
+		check.disabled=true;
+		console.log(-1)
+	}
+	else { 
+		button.disabled = false;
+		check.disabled=false;
+	}
+ }
+function findZirro(){
+	let zirro= document.getElementById('total_teach');
+	const button = document.getElementById('btnassign_subteacherSubmit');
+	if(zirro.value<=0){
+		button.disabled = true;
+	}
+	else {
+		button.disabled = false;
+	}
+}
+function findZirroBalance(){
+	let zirro_balance= document.getElementById('total_balance');
+	const check=document.getElementById('distribute');
+	if(zirro_balance.value==0)
+	{ check.disabled=false;
+
+	}
+	else  check.disabled=true;
+}
+
+function takeAll(){
+		let valuetotal_teach=0.0;
+		for(let field of fields){
+                    let param1=field.split(' ');
+					
+					let values_teach=document.getElementById(param1[0]+ '_balance').value;  
+					
+					
+
+				document.getElementById(param1[0]+ '_teach').value = values_teach;
+				valuetotal_teach=Number(valuetotal_teach)+ Number( values_teach);
+				 
+		}
+     findTotal();
+findBalance();
+
+		findZirro();
+		findZirroBalance();
+		noTeacher();
+}
+
+const buttonTakeAll=document.getElementById("btTakeAll");
+buttonTakeAll.addEventListener('click', takeAll,false);
+
+let currentteach=  document.getElementById("teacherid").value;
+
+const index = mList.findIndex(teach => teach.teacherid == currentteach);
+ 
+let arr_balance_base=[];
+
+
+
+	for(let field of fields){
+		let values_balance_base=0.0;
+		if(mList.length>1){
+			let param1=field.split(' ');
+			if(mList.length>2){
+												
+				for(let i=0;i<mList.length-1;i++){
+					if(index!=i){
+						
+							values_balance_base=parseFloat(values_balance_base)+ parseFloat(mList[i][param1[0]]);
+						}	
+					}				
+								
+			}
+				
+		}
+		arr_balance_base.push(values_balance_base);             
+					
+
+	}
+ 
+
+
+
+for(let i=0;i<arr_teach.length;i++){
+        arr_teach[i].addEventListener('input', findTotal,false);
+		arr_teach[i].addEventListener('input', findBalance,false);
+		arr_teach[i].addEventListener('input', findInvalid,false);
+		arr_teach[i].addEventListener('input', findZirro,false);
+		arr_teach[i].addEventListener('input', findZirroBalance,false);
+       
+    }
+	 
+	
+
+	</script>
+
+<%- include("../partials/footer"); %>

@@ -1,0 +1,56 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+a.del{ font-size :0.8em !important;
+  color: #ff5e00;
+}
+/*
+  Nota: si no usas el navbar, el siguiente código
+  no es necesario
+*/
+body{
+  padding-top: 70px;
+}
+div.file-color{ 
+  background-color:#e6fffa;
+   padding:10px;
+    border-radius:3px
+  }
+fieldset.fieldset-border{
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  /*margin: 0 0 1.5em 0 !important;*/
+}
+legend.legend-size{
+  font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+}
+h3.h3-align{
+  text-align: center;
+}
+h6.h6-align{
+  text-align: center;
+  color:crimson;
+}
+
+p.p-error{
+  text-align: center;
+  color:crimson;
+}
+input:invalid {
+  border: 2px dashed red;
+}
+.total{
+  background-color:rgb(20, 220, 220);
+  border: 2px dashed rgb(4, 0, 255);
+}
+.line-height-my{
+line-height:1.5rem;
+
+}

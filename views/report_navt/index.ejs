@@ -1,0 +1,168 @@
+<%- include("../partials/header"); %>
+<div class="col-sm-12">
+    <h3 class="h3-align">Накази про педагогічне навантаження </h3>
+	<%#namesTampl.length %>
+	
+
+	<div class="container">
+		<form id="uploadTampltForm" method="POST" action="/report_navt/upload_tampl" enctype ="multipart/form-data" cache=
+				'false' >
+		
+
+		
+		<div class="row file-color "  >
+			
+			<fieldset class="fieldset-border" >
+				<legend class="legend-size" > Завантажити шаблони </legend>
+				<div class="row">
+			<div class="col-sm-4">				
+					
+					<div class=" form-group form-inline">						
+						<input type="radio" checked	name="change" value="1"  id="change1" class="custom-control custom-radio custom-control-inline">
+						<label for="change1">шаблон ЗОП бюджет</label>				   
+					</div>
+					<div class=" form-group form-inline">						
+						<input type="radio"	name="change" value="2"  id="change2" class="custom-control custom-radio custom-control-inline">
+						<label for="change2">шаблон ОПП бюджет</label>				   
+					</div>
+					<div class=" form-group form-inline">						
+						<input type="radio"	name="change" value="3"  id="change3" class="custom-control custom-radio custom-control-inline">
+						<label for="change3">шаблон ЗОП контракт</label>				   
+					</div>
+					<div class=" form-group form-inline">						
+						<input type="radio"	name="change" value="4"  id="change4" class="custom-control custom-radio custom-control-inline">
+						<label for="change4">шаблон ОПП контракт</label>				   
+					</div>
+					<div class=" form-group form-inline">						
+						<input type="radio"	name="change" value="5"  id="change5" class="custom-control custom-radio custom-control-inline">
+						<label for="change5">шаблон сумісники</label>				   
+					</div>
+
+			</div>
+			
+			<div class="col-sm-2" >
+				
+<% 
+for(let i=0; i<namesTampl.length; i++){
+	if(namesTampl[i]!=undefined){ %>
+		
+		<div class=" form-group line-height-my" ><%= namesTampl[i]%><br></div>
+	
+<%
+	}
+	else{ %>
+		<div  class=" form-group form-inline"><br></div>
+<%
+	}
+}
+
+%>
+
+</div>		
+		</div>
+		<div class="row">
+			<div class="col-sm-12" >
+				
+				
+						<div class="form-group form-inline">
+							<label class="control-label" for="btnTamplSubmit">Виберіть файл  Word з новим шаблоном  у форматі *.docx</label>
+							<input type="file" class="form-control"  name="file" accept=".docx" />
+						</div>
+						
+						<div class="form-group">
+							<button type="submit" class="btn btn-danger" id="btnTamplSubmit" name="btnTamplSubmit" value="TamplSubmit"> 
+								Завантажити шаблон на сервер
+			   </button>
+						</div>
+					
+			</div>
+		</div>			
+				
+				</fieldset>	
+			</div>
+			</form>
+			<form id="uploadSingleFileForm" method="POST" action="/report_navt/upload" 
+			 cache=	'false' >
+	
+
+			<div class="row">
+				<div class="col-sm-8">
+			<fieldset class="fieldset-border">
+					
+				<legend class="legend-size">Сформувати попередні накази про педагогічне навантаження</legend>
+		<div class="row">
+			
+					
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmit1" name="btnOrderSubmit" value="1"> 
+					 ЗОП бюджет
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmit2" name="btnOrderSubmit" value="2"> 
+				 ОПП бюджет
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmit3" name="btnOrderSubmit" value="3"> 
+						 ЗОП контракт
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmit4" name="btnOrderSubmit" value="4"> 
+					 ОПП контракт
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmit5" name="btnOrderSubmit" value="5"> 
+								 сумісники
+				</button>
+			</div>
+			
+		</div>
+	</fieldset>
+	</div>
+	</div>
+	<div class="row">
+				<div class="col-sm-8">
+			<fieldset class="fieldset-border">
+					
+				<legend class="legend-size">Сформувати остаточні накази про педагогічне навантаження</legend>
+		<div class="row">
+			
+					
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmitFinish1" name="btnOrderSubmitFinish" value="1"> 
+					 ЗОП бюджет
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmitFinish2" name="btnOrderSubmitFinish" value="2"> 
+				 ОПП бюджет
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmitFinish3" name="btnOrderSubmitFinish" value="3"> 
+						 ЗОП контракт
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmitFinish4" name="btnOrderSubmitFinish" value="4"> 
+					 ОПП контракт
+				</button>
+			</div>
+			<div class="col-sm-2" >
+				<button type="submit" class="btn btn-danger" id="btnOrderSubmitFinish5" name="btnOrderSubmitFinish" value="5"> 
+								 сумісники
+				</button>
+			</div>
+			
+		</div>
+	</fieldset>
+	</div>
+	</div>
+		</form>		
+	</div>
+</div>
+
+	<%- include("../partials/footer"); %>

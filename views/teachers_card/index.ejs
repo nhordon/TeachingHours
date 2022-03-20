@@ -1,0 +1,42 @@
+<%- include("../partials/header"); %>
+<div class="col-sm-12">
+    <h3 class="h3-align">Картки викладачів </h3>
+	
+	
+
+	<div class="container">
+		<form id="uploadSingleFileForm" method="POST" action="/teachers_card/upload"  cache=
+				'false' >
+		
+
+	
+				<div class="row col-sm-12"  >
+			<fieldset class="fieldset-border" >
+				<legend class="legend-size" > Сформувати  картки викдадачів </legend>
+			
+		<div class="row "  >
+				<div class="col-sm-5">
+		
+					<button type="submit" class="btn btn-danger" id="btnEduloadSubmit1" name="btnEduloadSubmit" value="1" > 
+						Завантажити попередні картки 
+					</button>
+				</div>
+				<div class="col-sm-1"> </div>
+				<div  class="col-sm-5">
+					<button type="submit" class="btn btn-danger" id="btnEduloadSubmit2" name="btnEduloadSubmit" value="2" > 
+						Завантажити остаточні картки 
+					</button>
+				</div>
+			</div>
+				</fieldset>	
+				</div>
+		
+		
+		
+
+
+		</form>		
+	</div>
+</div>
+
+	<%- include("../partials/footer"); %>

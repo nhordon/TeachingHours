@@ -1,0 +1,52 @@
+<%- include("../partials/header"); %>
+
+<div class="col-12">
+    <h1>Додати  subjects</h1>
+    <form method="post" action="/subjects/insert">
+        
+        <div class="form-group">
+            <label for="name">name</label>
+            <input required id="name" placeholder="Скорочена назва предмету" class="form-control" type="text"
+                name="name">
+        </div>
+        <div class="form-group">
+            <label for="fullname">fullname</label>
+            <input required id="fullname" placeholder="Повна назва предмету" class="form-control" type="text"
+                name="fullname">
+        </div>
+        
+        <div class="form-group">
+            <label for="pckid">pckid</label>
+           
+            <select name="pckid" id="pckid" required class="form-control">
+                <option value="<%= pckAbr[0]._id %>" selected><%= pckAbr[0].abr %></option>
+               <% 
+               for(let i=1; i<pckAbr.length;i++){
+                %>
+                <option value="<%= pckAbr[i]._id %>"><%= pckAbr[i].abr %></option>
+                <%
+               }
+               %>   
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="programs">programs</label>
+           
+            <select name="programs" id="programs" required class="form-control">
+                <option value="ОПП" selected>ОПП</option>
+              
+                <option value="ЗОП">ЗОП</option>
+             
+              
+            </select>
+
+
+        </div>
+        
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/subjects" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

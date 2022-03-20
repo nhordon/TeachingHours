@@ -1,0 +1,39 @@
+<%- include("../partials/header"); %>
+
+<div class="col-12">
+    <h1>Додати  pck</h1>
+    <form method="post" action="/pck/insert">
+        <div class="form-group">
+            <label for="abr">abr</label>
+            <input required id="abr" placeholder="Скорочено ПЦК" class="form-control" 
+            type="text" name="abr">
+        </div>
+        <div class="form-group">
+            <label for="name">name</label>
+            <input required id="name" placeholder="Назва ПЦК" class="form-control" type="text"
+                name="name">
+        </div>
+        
+        <div class="form-group">
+            <label for="leaderid">leaderid</label>
+           
+            <select name="leaderid" id="leaderid" required class="form-control">
+                <option value="<%= leader[0]._id %>" selected><%= leader[0].name %></option>
+               <% 
+               for(let i=1; i<leader.length;i++){
+                %>
+                <option value="<%= leader[i]._id %>"><%= leader[i].name %></option>
+                <%
+               }
+               %>   
+            </select>
+        </div>
+        
+        
+        <div class="form-group">
+            <button class="btn btn-success">Зберегти</button>
+            &nbsp;<a href="/pck" class="btn btn-info">Назад</a>
+        </div>
+    </form>
+</div>
+<%- include("../partials/footer"); %>

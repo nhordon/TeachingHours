@@ -1,0 +1,198 @@
+<%- include("../partials/header"); %>
+<div class="col-sm-12">
+    <h3 class="h3-align">Завантажити навчальний план </h3>
+
+
+	<div class="container">
+		<form id="uploadSingleFileForm" method="POST" action="/upload_plan/upload" enctype ="multipart/form-data" cache=
+				'false' >
+		
+
+		<div class="row">
+			<div class="col-sm-8">
+				<fieldset class="fieldset-border">
+	 
+     
+					<legend class="legend-size">Робота з робочим навчальним планом у форматі *.xlsx</legend>
+					<div class="form-group form-inline">
+						<div class="col-sm-6" >
+						<label for="groupid" >Вибрати групу</label>
+					</div>	
+					<div class="col-sm-2">
+						<select name="groupid" id="groupid" required class="form-control">
+								<option value="<%= groupCourse[0]._id %>" selected><%= groupCourse[0].name %> - <%= groupCourse[0].course %> курс</option>
+								<% 
+								for(let i=1; i<groupCourse.length;i++){
+									%>
+									<option value="<%= groupCourse[i]._id %>" ><%= groupCourse[i].name %> - <%= groupCourse[i].course %> курс</option>
+									<% } %>
+				  
+							</select>
+							</div>
+					</div>
+					<hr/>
+					<div class="form-group form-inline" >
+						<div class="col-sm-6" style="text-align:left">
+						<label for="numsubject">Кількість дисцилін</label>
+						</div>
+						<div class="col-sm-2">
+						<input required id="numsubject" placeholder="1" class="form-control" 
+						type="number" min="1" max="50" name="numsubject">
+						</div>
+					</div>
+					<div class="form-group form-inline">
+						<div class="col-sm-6" >
+						<label for="numrowsubject">Номер рядка з назвою дисципліни</label>
+						</div>
+						<div class="col-sm-2" >
+						<input required id="numrowsubject" placeholder="1" class="form-control" 
+						type="number" min="1" max="25" name="numrowsubject">
+					</div>
+					</div>
+					<div class="form-group form-inline">
+						<div class="col-sm-6" >
+						<label for="numcolsubject">Номер стовпчика з назвою дисципліни</label>
+					</div>
+					<div class="col-sm-2" >
+						<input required id="numcolsubject" placeholder="1" class="form-control" 
+						type="number" min="1" max="25" name="numcolsubject">
+					</div>
+					</div>
+					<hr/>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="col-sm-12" style="text-align:center" >
+							1 семестр навчальні практики</div>
+							<div class="form-group form-inline">
+								<div class="col-sm-6" >
+								<label for="numpract1">Кількість практик</label>
+							</div>
+							<div class="col-sm-2" >
+								<input   id="numpract1" placeholder="0" class="form-control" 
+								type="number" min="0" max="10" name="numpract1">
+							</div>
+							</div>
+							<div class="form-group form-inline">
+								<div class="col-sm-6" >
+								<label for="numrowpract1">Номер рядка з назвою практики</label>
+							</div>
+							<div class="col-sm-2" >
+								<input   id="numrowpract1" placeholder="1" class="form-control" 
+								type="number" min="0" max="60" name="numrowpract1">
+							</div>
+							</div>
+							<div class="form-group form-inline">
+								<div class="col-sm-6" >
+								<label for="numcolpract1">Номер стовпчика з назвою практики</label>
+							</div>
+							<div class="col-sm-2" >
+								<input   id="numcolpract1" placeholder="1" class="form-control" 
+								type="number" min="0" max="25" name="numcolpract1">
+							</div>
+								</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="col-sm-12" style="text-align:center" >
+							2 семестр навчальні практики</div>
+							<div class="form-group form-inline">
+								<div class="col-sm-6" >
+								<label for="numpract2">Кількість практик</label>
+							</div>
+							<div class="col-sm-2" >
+								<input   id="numpract2" placeholder="0" class="form-control" 
+								type="number" min="0" max="10" name="numpract2">
+							</div>
+								</div>
+							<div class="form-group form-inline">
+								<div class="col-sm-6" >
+								<label for="numrowpract2">Номер рядка з назвою практики</label>
+							</div>
+							<div class="col-sm-2" >
+								<input   id="numrowpract2" placeholder="1" class="form-control" 
+								type="number" min="0" max="60" name="numrowpract2">
+							</div>
+								</div>
+							<div class="form-group form-inline">
+								<div class="col-sm-6" >
+								<label for="numcolpract2">Номер стовпчика з назвою практики</label>
+							</div>
+							<div class="col-sm-2" >
+							<input   id="numcolpract2" placeholder="1" class="form-control" 
+								type="number" min="0" max="25" name="numcolpract2">
+							</div>
+								</div>
+						</div>
+					</div>
+				</fieldset>	
+			</div>
+			<div class="col-sm-4">
+				<fieldset class="fieldset-border">
+					<legend class="legend-size">Робочі навчальні плани в базі</legend>
+					<ul>
+						<li>Рік &nbsp;- група-> предметів</li>
+						<% 
+						for(let i=0; i<Planid.length;i++){
+							%>
+							<li ><%= Planid[i].planind %> -> &nbsp;&nbsp;  <%=Planid[i].numsubjects%> &nbsp;&nbsp;  &nbsp;&nbsp; 
+							
+									<a href="/upload_plan/delete/<%= Planid[i].planind %>" class="del" 
+									title="Видалити <%= Planid[i].planind %>"> 	
+									видалити
+ 
+                    </a></li>
+							<% } %>
+					
+					</ul>
+				</fieldset>	
+			</div>
+		</div>
+		<div class="row file-color "  >
+			
+			<div class="col-sm-8" >
+				
+				
+					<div class="form-group">
+						<label class="control-label" for="uploadfile">Виберіть файл  Excel з робочим навчальним планом у форматі *.xlsx</label>
+						<input type="file" class="form-control"  name="file" required 
+						accept=".xlsx" />
+					</div>
+					
+				
+				
+			</div>
+			<div class="col-sm-4">
+				<fieldset class="fieldset-border" >
+					<legend class="legend-size">Завантажити новий план у базу, чи переписати існуючий</legend>
+					<div class="form-group">
+						
+			   
+						<select name="planind" id="planind" required class="form-control">
+							<option value="1 - Е00" selected style="color:#068f66">Завантажити новий</option>
+							<optgroup label="Переписати існуючий" style="color:#f11616">
+								
+							
+								
+								<% 
+								for(let i=0; i<Planid.length;i++){
+									%>
+							<option value="<%= Planid[i].planind %>">Переписати <%= Planid[i].planind %></option>
+									<% } %>
+							</optgroup>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-danger" id="btnUploadSingleFileSubmit"> 
+						 Завантажити 
+					</button>
+				
+				</fieldset>	
+			</div>
+		
+		</div> 
+		
+
+
+		</form>		
+	</div>
+</div>
+
+	<%- include("../partials/footer"); %>

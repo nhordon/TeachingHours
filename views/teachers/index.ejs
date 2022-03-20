@@ -1,0 +1,49 @@
+<%- include("../partials/header"); %>
+<div class="col-12">
+    <h1>Teachers</h1>
+    <a href="/teachers/add" class="btn btn-primary mb-2 btn-sm">Додати</a>
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr>
+                <th width="90px">Дії</th>
+               
+                <th>name</th>
+                <th>sovmest</th>
+                <th>norma</th>
+                <th>sverh</th>
+                <th>fact</th>
+                <th>position</th>
+                <th>category</th>
+                <th>pck</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% teachers.forEach(teachers => { %>
+            <tr>
+                <td>
+                    <a href="/teachers/edit/<%= teachers._id %>" class="btn btn-warning btn-sm" title="Редагувати">
+                        <img src="images/edit-24px.svg" width="16px" height="16px" />                   
+                    </a>             
+                   
+                    <a href="/teachers/delete/<%= teachers._id %>" class="btn btn-danger btn-sm" title="Видалити">
+                        <img src="images/delete_outline-24px.svg" width="16px" height="16px" />
+                    </a>
+                </td>
+                
+                <td><%= teachers.name %></td>
+                <%  let part_time=''; if(teachers.sovmest==true){part_time='сумісник';}
+                else{part_time='основний';}
+                %>
+                <td><%= part_time %></td>
+                <td><%= teachers.norma %></td>
+                <td><%= teachers.sverh %></td>
+                <td><%= teachers.fact %></td>
+                <td><%= teachers.position %></td>
+                <td><%= teachers.categoryname %></td>
+                <td><%= teachers.abr %></td>
+            </tr>
+            <% })%>
+        </tbody>
+    </table>
+</div>
+<%- include("../partials/footer"); %>
