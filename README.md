@@ -10,7 +10,7 @@ To run the system you have to:
 - Create database: db_name
 - Create database user : db_user with password: db_pswd
 	and grant the user permission to the database
-- Create tables in the database by using file create_table.sql
+- Create tables in the database by using file create_tables.sql
 - Fill in table specialities.
 3. Work with the system ‘nagruzka’
 - Set up the environment in .env file in the main directory of project using
