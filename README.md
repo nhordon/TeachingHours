@@ -17,8 +17,8 @@ To run the system you have to:
 database setup information, default server localhost, default port 5432 
 - From the main directory of project in terminal run command
 npm start
-- In any browser typing address localhost:3000
+- In any browser type address localhost:3000
  and move according link to specialities.
 - Using main menu you can move from one functionality to another.
-- To stop working with the system to close browser and stop the system app by pressing in terminal Ctrl+C
+- To finish work with the system you have to close browser and stop the app by pressing in terminal Ctrl+C
 
