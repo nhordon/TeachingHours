@@ -1,4 +1,4 @@
-# Nagruzka
+# TeachingHours 
 ### The system was made for education department of college to distribute groups, classes, teaching hours according to departments, semesters, studying years, subjects and types of teaching (lecture, practice, lab, project, diploma, etc) to teachers. The project allows generate different kind of orders and teacher cards with hours of teaching subjects, types of teaching and group names for a year.
 It uses Excel and Word templates for the generation. 
 Technologies are Node.js, Express.js, EJS, Postgresql.
@@ -12,7 +12,7 @@ To run the system you have to:
 	and grant the user permission to the database
 - Create tables in the database by using file create_tables.sql
 - Fill in table specialities.
-3. Work with the system ‘nagruzka’
+3. Work with the system ‘TeachingHours’
 - Set up the environment in .env file in the main directory of project using
 database setup information, default server localhost, default port 5432 
 - From the main directory of project in terminal run command
